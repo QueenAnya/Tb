@@ -1,6 +1,6 @@
 import { proto } from '../../WAProto'
 import { GroupMetadata, GroupParticipant, ParticipantAction, SocketConfig, WAMessageKey, WAMessageStubType } from '../Types'
-import { generateMessageID,generateMessageIDV2, generateMessageIDV2, generateMessageIDV3, unixTimestampSeconds } from '../Utils'
+import { generateMessageID, generateMessageIDV2, generateMessageIDV3, unixTimestampSeconds } from '../Utils'
 import { BinaryNode, getBinaryNodeChild, getBinaryNodeChildren, getBinaryNodeChildString, jidEncode, jidNormalizedUser } from '../WABinary'
 import { makeChatsSocket } from './chats'
 
