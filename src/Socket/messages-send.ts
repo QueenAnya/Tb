@@ -505,7 +505,7 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 						message = {}
 					}
 
-					const patched = await patchMessageBeforeSending(message, [])
+					const patched = await patchMessageBeforeSending(message)
 					const bytes = encodeNewsletterMessage(patched)
 
 					binaryNodeContent.push({
