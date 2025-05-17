@@ -492,13 +492,25 @@ export const makeMessagesSocket = (config: SocketConfig) => {
 					})
 
 					await authState.keys.set({ 'sender-key-memory': { [jid]: senderKeyMap } })
-				} else if(isNewsletter){
+				} else if(isNewsletter) {
+				    // Message edit
+					if (message.protocolMessage?.editedMessage) {
+						msgId = message.protocolMessage.key?.id!
+						message = message.protocolMessage.editedMessage
+					}
+
+					// Message delete
+					if (message.protocolMessage?.type === proto.Message.ProtocolMessage.Type.REVOKE) {
+						msgId = message.protocolMessage.key?.id!
+						message = {}
+					}
+
 					const patched = await patchMessageBeforeSending(message, [])
 					const bytes = encodeNewsletterMessage(patched)
 
 					binaryNodeContent.push({
 						tag: 'plaintext',
-						attrs: {},
+						attrs: mediaType ? { mediatype: mediaType } : {},
 						content: bytes
 					})
 				} else {
